@@ -8,7 +8,6 @@ A new Flutter project.
     -> If the project is hosted on a version control platform like GitHub, GitLab, or Bitbucket, you can use the following command to clone the repository to your local machine:
 
         git clone <repository_url>
-        <img src="/Users/manthanpatel/Desktop/Screenshot 2023-10-20 at 9.28.11 PM.png"/>
 
    -> Replace <repository_url> with the actual URL of the repository.
 
