@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/data.dart';
 import '../Models/shoes.dart';
 import '../Widgets/button.dart';
 import '../mongodb.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 class CartScreen extends StatefulWidget {
   @override
@@ -17,6 +21,30 @@ class _CartScreenState extends State<CartScreen> {
     super.initState();
     calculateTotalAmount();
   }
+
+  Future<void> updateUserCartDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
+
+    try {
+      var collection = db.collection('users');
+      List<String> cartItemJsonList = cartItems.map((item) => jsonEncode(item.toJson())).toList();
+      await collection.update(
+        mongo.where.eq('email', email),
+        mongo.modify
+            .set('cartItems', cartItemJsonList)
+            .set('indexNumbers', indexNumber)
+            .set('quantity', quantity)
+            .set('favorites', favoriteShoes.toList()),
+      );
+
+      print('User cart details updated successfully.');
+    } catch (e) {
+      print("Error occurred while updating user cart details!");
+      print(e);
+    }
+  }
+
 
   void calculateTotalAmount() {
     totalAmount = 0;
@@ -37,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
     for (int i = 0; i < cartItems.length; i++) {
       String shoeName = cartItems[i].name;
       String color = cartItems[i].colors[indexNumber[i]].color;
-      int remainingQuantity = cartItems[i].colors[indexNumber[i]].qty - quantity[i];
+      int remainingQuantity = (cartItems[i].colors[indexNumber[i]].qty - quantity[i]).toInt();
       await databaseInit.updateShoeQuantities(shoeName, color, remainingQuantity, indexNumber[i]);
     }
 
@@ -45,6 +73,7 @@ class _CartScreenState extends State<CartScreen> {
     indexNumber.clear();
     quantity.clear();
     updateTotalAmount();
+    updateUserCartDetails();
     setState(() {});
 
     ScaffoldMessenger.of(context).showSnackBar(
