@@ -18,12 +18,17 @@ Future<void> initializeVariables() async {
   var user = await collection.findOne(where.eq('email', userEmail));
   print("Hello From Data!!");
   if (user != null) {
+    // print("User object: $user");
     indexNumber.addAll(user['indexNumbers'] ?? []);
     quantity.addAll(user['quantity'] ?? []);
 
-    if (user['favoriteShoes'] != null) {
-      List<Map<String, dynamic>> favoriteShoesJsonList = json.decode(user['favoriteShoes']);
-      favoriteShoes = favoriteShoesJsonList.map((shoeJson) => Shoes.fromJson(shoeJson)).toSet();
+    if (user['favorites'] != null) {
+      List<dynamic> favoritesJsonList = user['favorites'];
+      favoritesJsonList.forEach((favoriteJson) {
+        Map<String, dynamic> parsedJson = json.decode(favoriteJson);
+        Shoes favoriteShoe = Shoes.fromJson(parsedJson);
+        favoriteShoes.add(favoriteShoe);
+      });
     }
 
     if (user['cartItems'] != null) {

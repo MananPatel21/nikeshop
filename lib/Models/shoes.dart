@@ -16,8 +16,6 @@ class ShoeColor {
   });
 
   factory ShoeColor.fromJson(Map<String, dynamic> json) {
-    // String colorString = json['color'].replaceAll('#', '');
-    // Color color = Color(int.parse(colorString, radix: 16));
     return ShoeColor(
       image: json['image'],
       color: json['color'],
