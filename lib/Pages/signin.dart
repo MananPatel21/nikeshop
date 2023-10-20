@@ -16,7 +16,7 @@ class _SigninPageUIState extends State<SigninPageUI> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   bool showPass = true;
-  Icon showPassIcon = Icon(Icons.visibility_off, color: Colors.orangeAccent.shade400,);
+  Icon showPassIcon = Icon(Icons.visibility_off, color: Colors.white54,);
 
   void verify() async {
     var collection = db.collection("users");
@@ -53,9 +53,9 @@ class _SigninPageUIState extends State<SigninPageUI> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                Color(0xFF003545),
-                Color(0xFF0B5269),
-                Color(0xFF00818A),
+                Color(0xFF1A1A1A),
+                Color(0xFF333333),
+                Color(0xFF131313),
               ]),
         ),
         child: Padding(
@@ -71,23 +71,30 @@ class _SigninPageUIState extends State<SigninPageUI> {
                     child: Text('Sign in',
                       style: TextStyle(color: Colors.white, fontSize: 45, fontWeight: FontWeight.bold),)),
                 SizedBox(
-                  width: 30,
+                  width: 60,
                 ),
+                SizedBox(width: 20),
                 Column(
                   children: [
+                    Image.asset(
+                      'assets/shoes/nike.png',
+                      width: 100,
+                      height: 100,
+                      color: Colors.white,
+                    ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      'Our Sing in Page',
-                      style: TextStyle(color: Colors.white54, fontSize: 23),
+                      'TrendFoot',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
-                      'Using FireBase',
-                      style: TextStyle(color: Colors.orangeAccent.shade400, fontSize: 23),
+                      'Walk the Trend',
+                      style: TextStyle(color: Colors.white54, fontSize: 23),
                     ),
                   ],
                 ),
@@ -97,26 +104,26 @@ class _SigninPageUIState extends State<SigninPageUI> {
               ),
               TextField(
                 controller: username,
-                style: TextStyle(color: Colors.orangeAccent.shade400),
-                cursorColor: Colors.orangeAccent.shade400,
+                style: TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                     // borderRadius: BorderRadius.all(Radius.circular(10)),
                     borderSide: BorderSide(
                       width: 1,
-                      color: Colors.orangeAccent.shade700,
+                      color: Colors.white,
                     ),
                   ),
                   enabledBorder: UnderlineInputBorder(
                     // borderRadius: BorderRadius.all(Radius.circular(10)),
                     borderSide: BorderSide(
                       width: 1,
-                      color: Colors.orangeAccent.shade400,
+                      color: Colors.white54,
                     ),
                   ),
                   hintText: 'Username or Email',
                   hintStyle: TextStyle(
-                    color: Colors.orangeAccent.shade400,
+                    color: Colors.white54,
                   ),
                 ),
               ),
@@ -125,20 +132,20 @@ class _SigninPageUIState extends State<SigninPageUI> {
               ),
               TextField(
                 controller: password,
-                style: TextStyle(color: Colors.orangeAccent.shade400),
+                style: TextStyle(color: Colors.white),
                 obscureText: showPass,
-                cursorColor: Colors.orangeAccent.shade400,
+                cursorColor: Colors.white,
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       width: 1,
-                      color: Colors.orangeAccent.shade700,
+                      color: Colors.white,
                     ),
                   ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       width: 1,
-                      color: Colors.orangeAccent.shade200,
+                      color: Colors.white54,
                     ),
                   ),
                   suffixIcon: IconButton(
@@ -147,17 +154,17 @@ class _SigninPageUIState extends State<SigninPageUI> {
                     onPressed: () {
                       if (showPass == true) {
                         showPass = false;
-                        showPassIcon = Icon(Icons.visibility, color: Colors.orangeAccent.shade400,);
+                        showPassIcon = Icon(Icons.visibility, color: Colors.white54,);
                       } else {
                         showPass = true;
-                        showPassIcon = Icon(Icons.visibility_off, color: Colors.orangeAccent.shade400,);
+                        showPassIcon = Icon(Icons.visibility_off, color: Colors.white54,);
                       }
                       setState(() {});
                     },
                   ),
                   hintText: 'Password',
                   hintStyle: TextStyle(
-                    color: Colors.orangeAccent.shade400,
+                    color: Colors.white54,
                   ),
                 ),
               ),
@@ -169,7 +176,7 @@ class _SigninPageUIState extends State<SigninPageUI> {
                 children: [
                   Text(
                     'Forgot Password?',
-                    style: TextStyle(color: Colors.orangeAccent.shade400),
+                    style: TextStyle(color: Colors.white70),
                   ),
                 ],
               ),
@@ -184,7 +191,7 @@ class _SigninPageUIState extends State<SigninPageUI> {
                         verify();
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orangeAccent.shade700,
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
                       child: Row(
@@ -209,7 +216,7 @@ class _SigninPageUIState extends State<SigninPageUI> {
                 children: [
                   Text(
                     'First Time?  ',
-                    style: TextStyle(color: Colors.orangeAccent.shade400, fontSize: 17),
+                    style: TextStyle(color: Colors.white70, fontSize: 17),
                   ),
                   GestureDetector(
                       onTap: () {
@@ -217,7 +224,7 @@ class _SigninPageUIState extends State<SigninPageUI> {
                       },
                       child: Text(
                         'Sign up',
-                        style: TextStyle(color: Colors.orangeAccent.shade700, fontSize: 17),
+                        style: TextStyle(color: Colors.white70, fontSize: 17),
                       )
                   ),
                 ],

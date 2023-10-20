@@ -33,7 +33,11 @@ class _SignUpState extends State<SignUp> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Color(0xFF003545), Color(0xFF0B5269), Color(0xFF00818A)],
+            colors: [
+              Color(0xFF1A1A1A),
+              Color(0xFF333333),
+              Color(0xFF131313),
+            ],
           ),
         ),
         child: Padding(
@@ -41,7 +45,7 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               const SizedBox(height: 70,),
-              const Row(
+              Row(
                 children: [
                   RotatedBox(
                     quarterTurns: 3,
@@ -50,13 +54,22 @@ class _SignUpState extends State<SignUp> {
                       style: TextStyle(color: Colors.white, fontSize: 45, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(width: 30,),
+                  SizedBox(width: 60,),
                   Column(
                     children: [
+                      Image.asset(
+                        'assets/shoes/nike.png',
+                        width: 100,
+                        height: 100,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       SizedBox(height: 20,),
-                      Text('Our SignUp Page', style: TextStyle(color: Colors.white54, fontSize: 23),),
+                      Text('TrendFoot', style: TextStyle(color: Colors.white, fontSize: 23),),
                       SizedBox(height: 4,),
-                      Text('Using FireBase', style: TextStyle(color: Colors.white54, fontSize: 23),),
+                      Text('Walk the Trend', style: TextStyle(color: Colors.white54, fontSize: 23),),
                     ],
                   ),
                 ],
@@ -160,9 +173,9 @@ class _SignUpState extends State<SignUp> {
             children: [
               Text(
                 'Ok',
-                style: TextStyle(fontSize: 20, color: Color.fromRGBO(100, 204, 197, 1)),
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
-              Icon(Icons.arrow_forward, color: Color.fromRGBO(100, 204, 197, 1)),
+              Icon(Icons.arrow_forward, color: Colors.black),
             ],
           ),
         ),
