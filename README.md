@@ -34,9 +34,7 @@ A new Flutter project.
 4. Create a New Cluster:
 
    -> In MongoDB Atlas, you need to create a cluster to host your database. Follow the prompts to create a new cluster. You can choose various configurations depending on your needs, and some options may have associated costs.
-          
-         <img src="/Users/manthanpatel/Desktop/Screenshot 2023-10-20 at 10.08.11 PM.png"/>
-         CLick on 
+           
 
 5. Set Up a Database:
 
