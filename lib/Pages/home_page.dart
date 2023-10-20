@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nikeshop/Models/data.dart';
 import 'package:nikeshop/Pages/shoe_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/shoes.dart';
 import '../Widgets/app_bar.dart';
 import '../Widgets/bottom_bar.dart';
+import '../mongodb.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 class HomePageShoes extends StatefulWidget {
   const HomePageShoes({super.key});
@@ -52,6 +58,31 @@ class _HomePageShoesState extends State<HomePageShoes> {
       }
     });
   }
+
+  Future<void> updateUserCartDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
+
+    try {
+      var collection = db.collection('users');
+      List<String> cartItemJsonList = cartItems.map((item) => jsonEncode(item.toJson())).toList();
+
+      await collection.update(
+        mongo.where.eq('email', email),
+        mongo.modify
+            .set('cartItems', cartItemJsonList)
+            .set('indexNumbers', indexNumber)
+            .set('quantity', quantity)
+            .set('favorites', favoriteShoes.toList()),
+      );
+
+      print('User cart details updated successfully.');
+    } catch (e) {
+      print("Error occurred while updating user cart details!");
+      print(e);
+    }
+  }
+
 
   Color getColor(){
     late final Color color;
@@ -220,7 +251,10 @@ class _HomePageShoesState extends State<HomePageShoes> {
                                   ),
                                   child: InkWell(
                                     onTap: () {
-
+                                      cartItems.add(shoes);
+                                      indexNumber.add(0);
+                                      quantity.add(1);
+                                      updateUserCartDetails();
                                     },
                                     child: const SizedBox(
                                     height: 100,
