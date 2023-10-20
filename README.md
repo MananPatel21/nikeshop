@@ -56,7 +56,7 @@ A new Flutter project.
    
         mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
 
-   -> Replace <username>, <password>, <cluster>, and <database> with the actual credentials and details you've configured in your Atlas cluster.
+   -> Replace username, password, cluster, and database with the actual credentials and details you've configured in your Atlas cluster.
 
 
 6. Select Your Device:
