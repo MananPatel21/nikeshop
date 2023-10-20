@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import '../mongodb.dart';
 
@@ -17,14 +16,22 @@ class ShoeColor {
   });
 
   factory ShoeColor.fromJson(Map<String, dynamic> json) {
-    String colorString = json['color'].replaceAll('#', '');
-    Color color = Color(int.parse(colorString, radix: 16));
+    // String colorString = json['color'].replaceAll('#', '');
+    // Color color = Color(int.parse(colorString, radix: 16));
     return ShoeColor(
       image: json['image'],
       color: json['color'],
       price: json['price'],
       qty: json['qty'],
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'image': image,
+      'color': color,
+      'price': price,
+      'qty': qty,
+    };
   }
 }
 
@@ -40,6 +47,15 @@ class Shoes {
     required this.ratings,
     required this.colors,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'type': type,
+      'ratings': ratings,
+      'colors': colors.map((color) => color.toJson()).toList(),
+    };
+  }
 
   factory Shoes.fromJson(Map<String, dynamic> json) {
     var colorList = json['colors'] as List;
