@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
-
 import '../mongodb.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -13,7 +12,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  bool _isPasswordHidden = true;
+  bool _showPass = true;
 
   @override
   void initState() {
@@ -39,7 +38,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   Future<void> updateUserDetails(String email, String newEmail, String newUsername, String newPassword) async {
     try {
-      var collection = db.collection('users'); // Assuming db is your MongoDB instance
+      var collection = db.collection('users');
       await collection.update(
         mongo.where.eq('email', email),
         mongo.modify
@@ -69,85 +68,103 @@ class _UserProfilePageState extends State<UserProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('User Profile'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Edit Profile'),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextFormField(
-                          controller: _emailController,
-                          decoration: InputDecoration(labelText: 'Email'),
-                        ),
-                        SizedBox(height: 12),
-                        TextFormField(
-                          controller: _usernameController,
-                          decoration: InputDecoration(labelText: 'Username'),
-                        ),
-                        SizedBox(height: 12),
-                        TextFormField(
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            suffixIcon: IconButton(
-                              icon: Icon(_isPasswordHidden ? Icons.visibility : Icons.visibility_off),
-                              onPressed: () {
-                                setState(() {
-                                  _isPasswordHidden = !_isPasswordHidden;
-                                });
-                              },
-                            ),
-                          ),
-                          obscureText: _isPasswordHidden,
-                        ),
-                      ],
-                    ),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _updateUserDetails();
-                          Navigator.pop(context);
-                        },
-                        child: Text('Save'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.blue,
-              child: Icon(
-                Icons.person,
-                size: 60,
-                color: Colors.white,
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/shoes/nike.png',
+                width: 100,
+                height: 100,
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Email: ${_emailController.text}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Username: ${_usernameController.text}',
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.black45,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _emailController,
+                      cursorColor: Colors.white,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        labelStyle: TextStyle(color: Colors.white), // Change this line
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white), // Change this line
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    TextFormField(
+                      controller: _usernameController,
+                      cursorColor: Colors.white,
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                        labelStyle: TextStyle(color: Colors.white), // Change this line
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white), // Change this line
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    TextFormField(
+                      controller: _passwordController,
+                      cursorColor: Colors.white,
+                      obscureText: _showPass,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        labelStyle: TextStyle(color: Colors.white), // Change this line
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white), // Change this line
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _showPass ? Icons.visibility : Icons.visibility_off,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _showPass = !_showPass;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  _updateUserDetails();
+                },
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

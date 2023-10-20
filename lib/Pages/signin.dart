@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nikeshop/Models/data.dart';
 import 'package:nikeshop/Pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +30,7 @@ class _SigninPageUIState extends State<SigninPageUI> {
       saveUserDetailsToLocal(result2['username'], password.text, username.text);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePageShoes()));
     }
+    await initializeVariables();
   }
 
   Future<void> saveUserDetailsToLocal(String username, String password, String email) async {

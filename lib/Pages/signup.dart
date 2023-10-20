@@ -15,7 +15,6 @@ class _SignUpState extends State<SignUp> {
   void createAccount() async {
     const CollectionName = "users";
     var collection = db.collection(CollectionName);
-    // print("Hello Before...");
     await collection.insertOne({
       "_id": newObjectID(),
       "username": usernameController.text.trim(),
