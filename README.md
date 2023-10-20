@@ -2,29 +2,15 @@
 
 A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 
 1. Clone the Repository:
 
     -> If the project is hosted on a version control platform like GitHub, GitLab, or Bitbucket, you can use the following command to clone the repository to your local machine:
 
         git clone <repository_url>
-    
-        (/Users/manthanpatel/Desktop/Screenshot 2023-10-20 at 9.28.11 PM.png)
+        <img src="/Users/manthanpatel/Desktop/Screenshot 2023-10-20 at 9.28.11 PM.png"/>
 
-    -> Replace <repository_url> with the actual URL of the repository.
+   -> Replace <repository_url> with the actual URL of the repository.
 
 
 2. Navigate to the Project Directory:
@@ -35,6 +21,7 @@ samples, guidance on mobile development, and a full API reference.
 
     -> Replace <project_directory> with the name of the directory created when you cloned the repository.
 
+
 3. Install Dependencies:
 
     -> Check the README.md file for instructions on how to install project dependencies. You may need to use Flutter's package manager, pub, or another package manager depending on the project.
@@ -43,9 +30,13 @@ samples, guidance on mobile development, and a full API reference.
 
         flutter pub get
 
+
 4. Create a New Cluster:
 
    -> In MongoDB Atlas, you need to create a cluster to host your database. Follow the prompts to create a new cluster. You can choose various configurations depending on your needs, and some options may have associated costs.
+          
+         <img src="/Users/manthanpatel/Desktop/Screenshot 2023-10-20 at 10.08.11 PM.png"/>
+         CLick on 
 
 5. Set Up a Database:
 
