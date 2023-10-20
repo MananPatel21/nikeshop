@@ -1,0 +1,1 @@
+const MONGO_URL = "mongodb+srv://manan:pm21@cluster0.j0rkdjv.mongodb.net/NikeStore?retryWrites=true&w=majority";
