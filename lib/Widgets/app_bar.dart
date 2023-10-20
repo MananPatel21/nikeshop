@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../Models/data.dart';
 import '../Pages/cart.dart';
+import '../Pages/favorite.dart';
 
 class CustomAppBar extends StatelessWidget{
   const CustomAppBar({super.key});
@@ -17,10 +19,16 @@ class CustomAppBar extends StatelessWidget{
             Image.asset("assets/shoes/nike.png", width: 40, height: 40,),
             Row(
               children: [
-                IconButton(onPressed: (){}, icon: const Icon(Icons.menu),),
+                IconButton(onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FavoriteScreen(favoriteShoes: favoriteShoes)),
+                  );
+                }, icon: const Icon(Icons.favorite),),
                 IconButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));
-                }, icon: const Icon(Icons.shopping_bag_outlined)),
+                }, icon: const Icon(Icons.shopping_bag_outlined)
+                ),
               ],
             )
           ],
